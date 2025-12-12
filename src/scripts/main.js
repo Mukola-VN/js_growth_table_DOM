@@ -1,5 +1,3 @@
-
-
 const appendRow = document.querySelector('.append-row');
 const removeRow = document.querySelector('.remove-row');
 
@@ -8,51 +6,51 @@ const removeColumn = document.querySelector('.remove-column');
 
 const table = document.querySelector('.field');
 
-let rows = [];
-
+// ---------------- ДОДАЮ КОЛОНКУ ----------------
 appendColumn.addEventListener('click', () => {
+  const columns = document.querySelectorAll('tr');
 
-  const newColumn = document.querySelectorAll('tr')
+  columns.forEach((column) => {
+    const td = document.createElement('td');
 
-  newColumn.forEach(column => {
-    const newTd = document.createElement('td');
-    column.appendChild(newTd);
+    column.appendChild(td);
   });
 });
 
+// ---------------- ВИДАЛЯЮ КОЛОНКУ ----------------
 removeColumn.addEventListener('click', () => {
-  const newColumn = document.querySelectorAll('tr');
+  const columns = document.querySelectorAll('tr');
 
-  newColumn.forEach(column => {
-    // Видаляємо останній <td>, якщо він існує
-    if (column.lastElementChild && column.lastElementChild.tagName === 'TD') {
+  columns.forEach((column) => {
+    if (column.lastElementChild) {
       column.removeChild(column.lastElementChild);
     }
   });
-
-
 });
 
-
-
+// ----------------  ДОДАЮ РЯДОК ----------------
 appendRow.addEventListener('click', () => {
-  const newRow = document.createElement('tr')
+  const newRow = document.createElement('tr');
 
-  const newRow1 = document.createElement('td')
-  const newRow2 = document.createElement('td')
-  const newRow3 = document.createElement('td')
-  const newRow4 = document.createElement('td')
+  const firstRow = table.querySelector('tr');
+  const columnCount = firstRow ? firstRow.children.length : 0;
 
-  newRow.appendChild(newRow1);
-  newRow.appendChild(newRow2);
-  newRow.appendChild(newRow3);
-  newRow.appendChild(newRow4);
+  // ДОДАЄМО СТІЛЬКИ Ж TD
+  for (let i = 0; i < columnCount; i++) {
+    const td = document.createElement('td');
+
+    newRow.appendChild(td);
+  }
 
   table.appendChild(newRow);
+});
 
-  rows.push(newRow);
-})
-
+// ---------------- ВИДАЛЯЮ РЯДОК ----------------
 removeRow.addEventListener('click', () => {
-  rows.pop().remove();
+  const rows = table.querySelectorAll('tr');
+
+  if (rows.length > 0) {
+    rows[rows.length - 1].remove();
+  }
+  
 });
