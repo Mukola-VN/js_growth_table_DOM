@@ -6,6 +6,9 @@ const removeColumn = document.querySelector('.remove-column');
 
 const table = document.querySelector('.field');
 
+
+
+
 // ---------------- ДОДАЮ КОЛОНКУ ----------------
 appendColumn.addEventListener('click', () => {
   const columns = document.querySelectorAll('tr');
@@ -52,5 +55,4 @@ removeRow.addEventListener('click', () => {
   if (rows.length > 0) {
     rows[rows.length - 1].remove();
   }
-  
 });
