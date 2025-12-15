@@ -1,4 +1,5 @@
-'use strict'
+'use strict';
+
 // ---------------- ОБ'ЄКТ З ВСІМА КНОПКАМИ ----------------
 const tableButtons = {
   appendRow: document.querySelector('.append-row'),
@@ -29,7 +30,6 @@ function updateButtonsState() {
   tableButtons.appendColumn.disabled = columnCount >= MAX_SIZE;
 }
 
-
 // ---------------- ДОДАЮ КОЛОНКУ ----------------
 tableButtons.appendColumn.addEventListener('click', () => {
   const columns = document.querySelectorAll('tr');
@@ -40,9 +40,8 @@ tableButtons.appendColumn.addEventListener('click', () => {
     column.appendChild(td);
   });
 
-  table.appendChild(columns);
+  updateButtonsState();
 });
-
 
 // ---------------- ВИДАЛЯЮ КОЛОНКУ ----------------
 tableButtons.removeColumn.addEventListener('click', () => {
@@ -60,7 +59,9 @@ tableButtons.removeColumn.addEventListener('click', () => {
 // ----------------  ДОДАЮ РЯДОК ----------------
 tableButtons.appendRow.addEventListener('click', () => {
   const newRow = document.createElement('tr');
-
+   // тут шукаю перший рядок таблиці
+   // якщо таблиця НЕ порожня → firstRow = <tr>;
+   // якщо таблиця порожня → firstRow = null;  
   const firstRow = table.querySelector('tr');
 
   const columnCount = firstRow ? firstRow.children.length : 0;
@@ -72,7 +73,9 @@ tableButtons.appendRow.addEventListener('click', () => {
     newRow.appendChild(td);
   }
 
-  table.appendChild(newRow);
+    table.appendChild(newRow);
+
+    updateButtonsState();
 });
 
 // ---------------- ВИДАЛЯЮ РЯДОК ----------------
@@ -81,9 +84,7 @@ tableButtons.removeRow.addEventListener('click', () => {
 
   if (rows.length > 0) {
     rows[rows.length - 1].remove();
-  }
+  };
 
   updateButtonsState();
 });
-
-
